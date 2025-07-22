@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
+
 import Register from "./Register";
+import Login from "./Login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -7,7 +9,8 @@ function App() {
   return (
     <>
       <main className="App">
-        <Register />
+        {/* <Register /> */}
+        <Login />
       </main>
     </>
   );
