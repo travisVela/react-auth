@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const handleLogin = async (req, res) => {
   const cookies = req.cookies;
+  console.log(`cookie available at login: ${JSON.stringify(cookies)}`);
   const { username, password } = req.body;
 
   if (!username || !password)
@@ -39,7 +40,7 @@ export const handleLogin = async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    let newRefreshTokenArray = !cookies.jwt
+    let newRefreshTokenArray = !cookies?.jwt
       ? foundUser.refreshToken
       : foundUser.refreshToken.filter((rt) => rt !== cookies.jwt);
 
@@ -68,7 +69,7 @@ export const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.status(200).json({ accessToken });
+    res.status(200).json({ roles, accessToken });
   } else {
     res.sendStatus(401);
   }
